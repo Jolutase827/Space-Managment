@@ -1,15 +1,5 @@
-.footer{
-    background-color: #49108B;
-    color: rgb(255, 255, 255);
-    font-family: 'Jost', sans-serif;
-    font-family: 'Oswald', sans-serif;
-}
-header{
-    height: 110px;
-    background-color:#7E30E1;
-}
 main{
-    height: 450px;
+    height: 75vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,10 +12,6 @@ main>div{
     height: 340px;
     background-color: white;
    
-}
-header>h1{
-    color: white;
-    font-family: 'Architects Daughter', cursive;
 }
 input{
     border: 1px;
