@@ -1,5 +1,5 @@
 <?php
-const BASE='virtualmarket';
+const BASE='spacemanager';
 const HOST='localhost';
 const USUARIO ='root';
 const PASS='';

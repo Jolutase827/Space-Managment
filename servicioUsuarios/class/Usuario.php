@@ -7,7 +7,7 @@
         private $email;
         private $admin;
 
-        public function __construct($nombreUsuario,$nombre = '',$apellido = '',$pwd,$email='',$admin) {
+        public function __construct($nombreUsuario,$nombre = '',$apellido = '',$pwd='',$email='',$admin='') {
             $this->nombreUsuario = $nombreUsuario;
             $this->nombre = $nombre;
             $this->apellido = $apellido;
@@ -24,6 +24,16 @@
         }
 
         
-
+        public function getUser($link){
+            try{
+                $query = 'SELECT * FROM usuarios WHERE nombreUsuario = ?';
+                $stmt = $link->prepare($query);
+                $stmt->bindParam(1,$this->nombreUsuario);
+                $stmt->execute();
+                return $stmt->fetch(PDO::FETCH_ASSOC);
+            }catch(PDOException $e){
+                return null;
+            }
+        }
 
     }

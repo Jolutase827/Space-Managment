@@ -1,5 +1,5 @@
 main{
-    height: 75vh;
+    height: 700px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -9,9 +9,25 @@ main{
     background-repeat: no-repeat;
 }
 main>div{
-    height: 340px;
+    min-height: 340px;
     background-color: white;
    
+}
+#error>div{
+    animation-name: pop;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+@keyframes pop {
+    0%{
+        transform: scale(0);
+    }
+    90%{
+        transform: scale(110%);
+    }
+    100%{
+        transform: scale(100%);
+    }
 }
 input{
     border: 1px;
