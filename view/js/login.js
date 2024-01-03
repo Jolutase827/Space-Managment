@@ -5,13 +5,12 @@ const error = document.getElementById('error');
 
 boton.addEventListener('click',()=>{
     if(nombre.value!=''&&pwd.value!=''){
-        fetch(`https://localhost/Space-Managment/servicioUsuarios/service.php?nombre=${nombre.value}&pwd=${pwd.value}`)
+        fetch(`http://localhost/Space Managment/servicioUsuarios/service.php?nombre=${nombre.value}&pwd=${pwd.value}`)
         .then(response=> response.json())
         .then(data=>{
             if(data!=null){
-                console.log(data);
                 if(data.admin){
-
+                    location.replace('rootInterface.php');
                 }
             }else{
                 error.innerHTML = `<div class="alert alert-danger text-center col-4 mt-3" role="alert">
@@ -19,7 +18,9 @@ boton.addEventListener('click',()=>{
                                     </div>`;
             }
         })
-        .catch(error=> console.log('error'))
+        .catch(fetchError=> error.innerHTML = `<div class="alert alert-danger text-center col-4 mt-3" role="alert">
+                                        Sorry, we have probles in the web please try in other time.
+                                    </div>`);
     }else{
         error.innerHTML = `<div class="alert alert-danger text-center col-4 mt-3" role="alert">
                                         Please, complete all the fieldes

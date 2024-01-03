@@ -1,0 +1,13 @@
+main{
+    height: 75vh;
+    background-image: linear-gradient(to bottom, #7E30E1 , #49108B);
+}
+main>div{
+    background-color: white;
+    min-height: 300px;
+    font-family: 'Nova Square', sans-serif;
+}
+main>div>h2>i{
+    cursor: pointer;
+    font-size: 25px;
+}
