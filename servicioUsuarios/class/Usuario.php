@@ -53,6 +53,16 @@ class Usuario
             return null;
         }
     }
+    public static function getAll($link){
+        try {
+            $query = 'SELECT * FROM usuarios WHERE nombreUsuario != "root"';
+            $stmt = $link->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
 
     public function insert($link)
     {

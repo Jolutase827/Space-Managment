@@ -15,7 +15,10 @@
             header("HTTP/1.1 200 OK");
             echo json_encode(null);
             exit();
-        }   
+        }
+        header("HTTP/1.1 200 OK");
+        echo json_encode(Usuario::getAll($bd->link));
+        exit();
     }
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $body = json_decode(file_get_contents('php://input'), true);

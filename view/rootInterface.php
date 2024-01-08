@@ -30,15 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="container-users mt-4 d-flex flex-column align-items-center">
-                <div class='usuario col-11 d-flex justify-content-between p-2 justify-content-center rounded mb-1'>
-                    <h4 class="col-8 mt-1 ms-4">Manuel</h4>
-                    <div class='col-1 d-flex justify-content-between me-5 mt-1'>
-                        <i class="bi bi-file-text"></i>
-                        <i class="bi bi-pen"></i>
-                        <i class="bi bi-trash3-fill"></i>
-                    </div>
-                </div>
+            <div class="container-users mt-4 d-flex flex-column align-items-center" id="user-container">
             </div>
             <br>
         </main>

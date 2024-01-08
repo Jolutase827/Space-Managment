@@ -5,7 +5,7 @@ const error = document.getElementById('error');
 
 boton.addEventListener('click',()=>{
     if(nombre.value!=''&&pwd.value!=''){
-        fetch(`http://localhost/Space Managment/servicioUsuarios/service.php?nombre=${nombre.value}&pwd=${pwd.value}`)
+        fetch(`https://localhost/Space Managment/servicioUsuarios/service.php?nombre=${nombre.value}&pwd=${pwd.value}`)
         .then(response=> response.json())
         .then(data=>{
             if(data!=null){

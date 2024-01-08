@@ -33,9 +33,9 @@ buttonAddUser.addEventListener('click',()=>{
             headers:{
                 'Content-Type': 'aplication/json',
             },
-            body: JSON.stringify({"nombreUsuario": inputName.value,"nombre":inputName.value,"apellido":inputLastName.value,"password":inputPassword.value, "email": inputEmail.value })
+            body: JSON.stringify({"nombreUsuario": inputUserName.value,"nombre":inputName.value,"apellido":inputLastName.value,"password":inputPassword.value, "email": inputEmail.value })
         };
-        fetch('http://localhost/Space Managment/servicioUsuarios/service.php',options)
+        fetch('https://localhost/Space Managment/servicioUsuarios/service.php',options)
         .then(response => response.json())
         .then(data=> {
             if(data!=null){
