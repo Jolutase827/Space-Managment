@@ -1,6 +1,13 @@
 <?php
+    header('Access-Control-Allow-Origin: *');
+    header('Content-Type: application/json');
+    header("Access-Control-Allow-Credentials: true");
+    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+    header('Access-Control-Max-Age: 1000');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
     include('config/autocharge.php');
     $bd = new Base();
+
     if ($_SERVER['REQUEST_METHOD'] == 'GET'){
         if(isset($_GET['nombre'])&&isset($_GET['pwd'])){
             $usuario = new Usuario($_GET['nombre']);
