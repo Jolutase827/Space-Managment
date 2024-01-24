@@ -7,7 +7,8 @@
     header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
     include('config/autocharge.php');
     $bd = new Base();
-
+    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS'){
+    }
     if ($_SERVER['REQUEST_METHOD'] == 'GET'){
         if(isset($_GET['nombre'])&&isset($_GET['pwd'])){
             $usuario = new Usuario($_GET['nombre']);
