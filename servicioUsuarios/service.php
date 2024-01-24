@@ -9,6 +9,7 @@
     $bd = new Base();
     if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS'){
     }
+    
     if ($_SERVER['REQUEST_METHOD'] == 'GET'){
         if(isset($_GET['nombre'])&&isset($_GET['pwd'])){
             $usuario = new Usuario($_GET['nombre']);
@@ -21,7 +22,7 @@
                 }
             }
             header("HTTP/1.1 200 OK");
-            echo json_encode(null);
+            echo json_encode(Usuario::getAll($bd->link));
             exit();
         }
         header("HTTP/1.1 200 OK");
