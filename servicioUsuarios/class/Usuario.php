@@ -80,4 +80,16 @@ class Usuario
             return null;
         }
     }
+    public function borrar($link)
+    {
+        try {
+            $query = 'DELETE FROM usuarios WHERE nombreUsuario =?';
+            $stmt = $link->prepare($query);
+            $stmt->bindParam(1, $this->nombreUsuario);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
 }
