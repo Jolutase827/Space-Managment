@@ -53,7 +53,20 @@ class Usuario
             return null;
         }
     }
-    public static function getAll($link){
+    public function comprobeUpdate($link){
+        try {
+            $query = 'SELECT * FROM usuarios WHERE nombreUsuario != ? AND email = ?';
+            $stmt = $link->prepare($query);
+            $stmt->bindParam(1, $this->nombreUsuario);
+            $stmt->bindParam(2, $this->email);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+    public static function getAll($link)
+    {
         try {
             $query = 'SELECT * FROM usuarios WHERE nombreUsuario != "root"';
             $stmt = $link->prepare($query);
@@ -80,6 +93,33 @@ class Usuario
             return null;
         }
     }
+
+    public function update($link)
+    {
+        try {
+            if ($this->pwd != '') {
+                $query = ('UPDATE usuarios SET   password=?,nombre=?, apellido=?, email=? WHERE nombreUsuario=?');
+                $stmt = $link->prepare($query);
+                $stmt->bindParam(1, $this->pwd);
+                $stmt->bindParam(2, $this->nombre);
+                $stmt->bindParam(3, $this->apellido);
+                $stmt->bindParam(4, $this->email);
+                $stmt->bindParam(5, $this->nombreUsuario);
+            } else {
+                $query = ('UPDATE usuarios SET  nombre=?, apellido=?, email=? WHERE nombreUsuario=?');
+                $stmt = $link->prepare($query);
+                $stmt->bindParam(2, $this->nombre);
+                $stmt->bindParam(3, $this->apellido);
+                $stmt->bindParam(4, $this->email);
+                $stmt->bindParam(5, $this->nombreUsuario);
+            }
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            return $e;
+        }
+    }
+
     public function borrar($link)
     {
         try {

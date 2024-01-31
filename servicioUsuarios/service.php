@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo json_encode(null);
         exit();
     }
-    if(isset($_GET['root']) && isset($_GET['nombre'])){
+    if (isset($_GET['root']) && isset($_GET['nombre'])) {
         $usuario = new Usuario($_GET['nombre']);
         $usuario = $usuario->getUser($bd->link);
         header("HTTP/1.1 200 OK");
@@ -34,26 +34,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     echo json_encode(Usuario::getAll($bd->link));
     exit();
 }
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $body = json_decode(file_get_contents('php://input'), true);
+        $usuario = new Usuario($body['nombreUsuario'], $body['nombre'], $body['apellido'], password_hash($body['password'], PASSWORD_DEFAULT), $body['email']);
+        if ($usuario->comprobeNameAndEmail($bd->link) == null) {
+            $inserted = $usuario->insert($bd->link);
+        } else {
+            $inserted = null;
+        }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $body = json_decode(file_get_contents('php://input'), true);
-    $usuario = new Usuario($body['nombreUsuario'], $body['nombre'], $body['apellido'], password_hash($body['password'], PASSWORD_DEFAULT), $body['email']);
-    if ($usuario->comprobeNameAndEmail($bd->link) == null) {
-        $inserted = $usuario->insert($bd->link);
-    } else {
-        $inserted = null;
+        header("HTTP/1.1 200 OK");
+        echo json_encode($inserted);
+        exit();
     }
-
-    header("HTTP/1.1 200 OK");
-    echo json_encode($inserted);
-    exit();
-}
-if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-    $body = json_decode(file_get_contents('php://input'), true);
-    $usuario = new Usuario($body['nombreUsuario'], '', '', '', '');
-    $usuario->borrar($bd->link);
-    header("HTTP/1.1 200 OK");
-    echo json_encode("Borrado");
-    exit();
-}
+    if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+        $body = json_decode(file_get_contents('php://input'), true);
+        $usuario = new Usuario($body['nombreUsuario'], '', '', '', '');
+        $usuario->borrar($bd->link);
+        header("HTTP/1.1 200 OK");
+        echo json_encode("Borrado");
+        exit();
+    }
+    if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+        $body = json_decode(file_get_contents('php://input'), true);
+        $usuario = new Usuario($body['nombreUsuario'], $body['nombre'], $body['apellido'], password_hash($body['password'], PASSWORD_DEFAULT), $body['email']);
+        if ($usuario->comprobeUpdate($bd->link)==null) {
+            $usuario->update($bd->link);
+            header("HTTP/1.1 200 OK");
+            echo json_encode(true);
+        } else {
+            header("HTTP/1.1 200 OK");
+            echo json_encode(false);
+        }
+        exit();
+    }
 header("HTTP/1.1 400 Bad Request");
