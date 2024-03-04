@@ -48,7 +48,7 @@ class Hora
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
-            return null;
+            return $e->getMessage();
         }
     }
 }

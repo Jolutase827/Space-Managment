@@ -19,14 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 }
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $body = json_decode(file_get_contents('php://input'), true);
-        $festivo = new Festivo('', $body['nombre'], $body['dia']);
+        $festivo = new Festivo('', $body['dia']);
         header("HTTP/1.1 200 OK");
         echo json_encode($festivo->insert($bd->link));
         exit();
     }
     if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         $body = json_decode(file_get_contents('php://input'), true);
-        $aula = new Festivo($body['id'], '', '');
+        $aula = new Festivo( '',$body['dia']);
         $aula->borrar($bd->link);
         header("HTTP/1.1 200 OK");
         echo json_encode("Borrado");

@@ -2,13 +2,11 @@
 class Festivo
 {
     private $id;
-    private $nombre;
     private $dia;
 
-    public function __construct($id, $nombre = '', $dia = '')
+    public function __construct($id, $dia = '')
     {
         $this->id = $id;
-        $this->nombre = $nombre;
         $this->dia = $dia;
     }
 
@@ -38,12 +36,11 @@ class Festivo
     public function insert($link)
     {
         try {
-            $query = 'INSERT INTO festivo(nombre,dia) VALUES(?,?)';
+            $query = 'INSERT INTO festivo(dia) VALUES(?)';
             $stmt = $link->prepare($query);
-            $stmt->bindParam(1, $this->nombre);
-            $stmt->bindParam(2, $this->dia);
+            $stmt->bindParam(1, $this->dia);
             $stmt->execute();
-            return true;
+            return $stmt;
         } catch (PDOException $e) {
             return null;
         }
@@ -52,9 +49,9 @@ class Festivo
     public function borrar($link)
     {
         try {
-            $query = 'DELETE FROM festivo WHERE id =?';
+            $query = 'DELETE FROM festivo WHERE dia =?';
             $stmt = $link->prepare($query);
-            $stmt->bindParam(1, $this->id);
+            $stmt->bindParam(1, $this->dia);
             $stmt->execute();
             return true;
         } catch (PDOException $e) {
